@@ -9,6 +9,9 @@
     border: 1px solid black;
     border-radius: 10px;
     width: 300px;
+    align-items:center;
+    word-break: break-all;
+    padding: 5px;
 }
 
 .row1, .row2, .row3, .row4, .row5, .row6 {
