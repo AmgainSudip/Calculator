@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#box {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.row1, .row2, .row3, .row4, .row5, .row6 {
+    display: flex;
+    width: 300px;
+    height: 90px;
+}
+
+button {
+    width: 100%;
+}
