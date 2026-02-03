@@ -1,54 +1,121 @@
 let userInp = "";
 
-function add(num1, addOpe, num2) {
+function add(array) {
+    let new_arr = array.filter(item => item !== "+");
     let sum = 0;
-    sum = parseInt(num1) + parseInt(num2);
-    console.log(sum);
+
+    for (let i = 0; i< new_arr.length; i++) {
+        sum += parseFloat(new_arr[i]);
+    }
     displayResult(sum);
 }
 
-function subtract(num1, subOpe, num2) {
-    return num1- num2;
+function subtract(array) {
+    let new_arr = array.filter(item => item !== "-");
+    let sub = new_arr[0];
+
+    for (let i = 1; i< new_arr.length; i++) {
+        sub -= parseFloat(new_arr[i]);
+    }
+    displayResult(sub);
 }
 
-function multiply(a, mulOpe, b) {
-    return a*b;
+
+function multiply(array) {
+    let new_arr = array.filter(item => item !== "×");
+    let mult = 1;
+
+    for (let i = 0; i< new_arr.length; i++) {
+        mult = mult * parseFloat(new_arr[i]);
+    }
+     displayResult(mult);
 }
 
-function divide(a,divOpe,b) {
-    return a/b;
+function divide(array) {
+    let new_arr = array.filter(item => item !== "÷");
+    let divide = new_arr[0]; 
+
+    for (let i = 1; i< new_arr.length; i++) {
+        divide = divide / parseFloat(new_arr[i]);
+    }
+
+    displayResult(divide);
 
 }
 
 function factorial(num) {
+    let a = num[0];
+    let fact = num[0];
 
+    if (a == 0) {
+        fact = 1;
+    }
+    
+    else {
+        for(let i=0; i < num[0]; i++) {
+            if (a > 1) {
+                fact = fact*(a-1);
+                a--;
+            }
+        }
+    }
+    console.log(fact);
+    displayResult(fact);
 }
 
-function operate(operator) {
-    if (operator == "+") {
-        let nums = userInp.split("+");
-        add(nums[0], operator, nums[1]);
-    }
-
-    else if (operator == "-") {
-        let nums = userInp.split("-");
-        subtract(nums[0], operator, nums[1]);
-    }
-
-    else if (operator == "×") {
+let operator = "";
+function operate() {
+        
+     if (userInp.includes("×")) {
         let nums = userInp.split("×");
-        multiply(nums[0], operator, nums[1]);
+        for (let i= 0; i < nums.length; i++) {
+            multiply(nums);
+        }
+        operator += "";
     }
-
-    else if (operator == "÷") {
+    
+     if (userInp.includes("÷")) {
         let nums = userInp.split("÷");
-        divide(nums[0], operator, nums[1]);
+        for (let i= 0; i < nums.length; i++) {
+            divide(nums);
+        }
+        operator += "";
+    }
+    
+     if (userInp.includes("!")) {
+        let nums = userInp.split("!");
+        for (let i= 0; i < nums.length; i++) {
+            factorial(nums);
+        }
+        operator += "";
+    }
+        
+    if (userInp.includes("+")) {
+        let nums = userInp.split("+");
+        for (let i= 0; i < nums.length; i++) {
+            add(nums);
+        }
+        operator += "";
     }
 
-    else if (operator == "!") {
-        let num = userInp.split("!");
-        factorial(num);
+    if (userInp.includes("-")) {
+        let nums = userInp.split("-");
+        for (let i= 0; i < nums.length; i++) {
+            subtract(nums);
+        }
+        operator += "";
     }
+
+    if (userInp.includes("(")) {
+        let nums = userInp.split("(");
+        let new_arr = nums.filter(item => item !== "(");
+    }
+
+    if (userInp.includes(")")) {
+        let nums = userInp.split(")");
+        let new_arr = nums.filter(item => item !== ")");
+    }
+
 }
 
 function updateNum() {
@@ -59,20 +126,15 @@ const box = document.querySelector("#box");
 const clear = document.querySelector("#clear");
 const equal = document.querySelector("#equal");
 
-let operator = "";
-btn.forEach(button => {
-    if (button.textContent == "+" || button.textContent == "-" || button.textContent == "×" || button.textContent == "÷") {
-        button.addEventListener("click", (event) => {
-            display(button.textContent);})
-            operator = button.textContent;
-    }
 
-    else if (button.textContent != "Clear" && button.textContent != "=") {
+let i = 0;
+
+btn.forEach(button => {
+   if (button.textContent != "Clear" && button.textContent != "=") {
         button.addEventListener("click", (event) => {
             display(button.textContent); 
-    });}
-    console.log(operator)
-});
+        })
+        }});
 
 clear.addEventListener("click", () => {
     userInp = "";
@@ -92,5 +154,5 @@ function displayResult(result) {
 }
 
 equal.addEventListener("click", () =>
-    operate(operator)
+    operate()
 );
