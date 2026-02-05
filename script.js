@@ -1,47 +1,9 @@
 let userInp = "";
-
-function add(array) {
-    let new_arr = array.filter(item => item !== "+");
-    let sum = 0;
-
-    for (let i = 0; i< new_arr.length; i++) {
-        sum += parseFloat(new_arr[i]);
-    }
-    displayResult(sum);
-}
-
-function subtract(array) {
-    let new_arr = array.filter(item => item !== "-");
-    let sub = new_arr[0];
-
-    for (let i = 1; i< new_arr.length; i++) {
-        sub -= parseFloat(new_arr[i]);
-    }
-    displayResult(sub);
-}
+let numInp= [];
+let opeInp = [];
 
 
-function multiply(array) {
-    let new_arr = array.filter(item => item !== "×");
-    let mult = 1;
 
-    for (let i = 0; i< new_arr.length; i++) {
-        mult = mult * parseFloat(new_arr[i]);
-    }
-     displayResult(mult);
-}
-
-function divide(array) {
-    let new_arr = array.filter(item => item !== "÷");
-    let divide = new_arr[0]; 
-
-    for (let i = 1; i< new_arr.length; i++) {
-        divide = divide / parseFloat(new_arr[i]);
-    }
-
-    displayResult(divide);
-
-}
 
 function factorial(num) {
     let a = num[0];
@@ -63,63 +25,7 @@ function factorial(num) {
     displayResult(fact);
 }
 
-let operator = "";
-function operate() {
-        
-     if (userInp.includes("×")) {
-        let nums = userInp.split("×");
-        for (let i= 0; i < nums.length; i++) {
-            multiply(nums);
-        }
-        operator += "";
-    }
-    
-     if (userInp.includes("÷")) {
-        let nums = userInp.split("÷");
-        for (let i= 0; i < nums.length; i++) {
-            divide(nums);
-        }
-        operator += "";
-    }
-    
-     if (userInp.includes("!")) {
-        let nums = userInp.split("!");
-        for (let i= 0; i < nums.length; i++) {
-            factorial(nums);
-        }
-        operator += "";
-    }
-        
-    if (userInp.includes("+")) {
-        let nums = userInp.split("+");
-        for (let i= 0; i < nums.length; i++) {
-            add(nums);
-        }
-        operator += "";
-    }
 
-    if (userInp.includes("-")) {
-        let nums = userInp.split("-");
-        for (let i= 0; i < nums.length; i++) {
-            subtract(nums);
-        }
-        operator += "";
-    }
-
-    if (userInp.includes("(")) {
-        let nums = userInp.split("(");
-        let new_arr = nums.filter(item => item !== "(");
-    }
-
-    if (userInp.includes(")")) {
-        let nums = userInp.split(")");
-        let new_arr = nums.filter(item => item !== ")");
-    }
-
-}
-
-function updateNum() {
-}
 
 const btn = document.querySelectorAll("button");
 const box = document.querySelector("#box");
@@ -130,11 +36,28 @@ const equal = document.querySelector("#equal");
 let i = 0;
 
 btn.forEach(button => {
-   if (button.textContent != "Clear" && button.textContent != "=") {
+      
+    if (button.textContent == "0" || button.textContent == "1" || button.textContent == "2" || button.textContent == "3" || button.textContent == "4" || button.textContent == "5" || button.textContent == "6" || button.textContent == "7" || button.textContent == "8" || button.textContent == "9") {
+        button.addEventListener("click", (event) => {
+            display1(button.textContent); 
+        })
+    }
+
+
+    if (button.textContent == "+" || button.textContent == "-" || button.textContent == "!" || button.textContent == "×" || button.textContent == "÷") {
+         button.addEventListener("click", (event) => {
+            display2(button.textContent); 
+        })
+    }
+
+    if (button.textContent != "Clear" || button.textContent != "=") {
         button.addEventListener("click", (event) => {
             display(button.textContent); 
         })
-        }});
+        }
+    
+   
+    });
 
 clear.addEventListener("click", () => {
     userInp = "";
@@ -147,12 +70,28 @@ function display(input) {
     box.innerHTML = userInp;
 }
 
+let j = 0;
+function display1(input) {
+    numInp[j]= input;
+    box.innerHTML = numInp;
+    j++;
+}
+
+let k = 0;
+function display3(input) {
+    opeInpInp[k] = input;
+    box.innerHTML = opeInp;
+    k++;
+}
+
 function displayResult(result) {
     box.innerHTML = "";
-    box.innerHTML = result;
+    box.innerHTML = " Ans: " + result;
     userInp = "";
+    userInp += result;
 }
 
 equal.addEventListener("click", () =>
     operate()
 );
+
